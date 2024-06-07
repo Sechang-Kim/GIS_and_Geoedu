@@ -1,0 +1,14 @@
+---
+title: "Introduction"
+author: "김세창"
+format: html
+editor: visual
+---
+
+## GIS
+
+지리교육에서 GIS의 활용은 오랫동안 강조되어 왔고, 또한 여러 가지 측면에서 시도되어왔다.
+
+## Running Code
+
+그렇다면 왜 중요한가?

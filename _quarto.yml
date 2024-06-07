@@ -1,0 +1,20 @@
+project:
+  type: book
+
+book:
+  title: "book_test"
+  author: "Norah Jones"
+  date: "2024. 6. 6."
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - summary.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+
+editor: visual
