@@ -1,10 +1,11 @@
 project:
   type: book
+  output-dir: docs
 
 book:
-  title: "book_test"
-  author: "Norah Jones"
-  date: "2024. 6. 6."
+  title: "GIS와 지리교육"
+  author: "김세창"
+  date: "2024. 6. 8."
   chapters:
     - index.qmd
     - intro.qmd
