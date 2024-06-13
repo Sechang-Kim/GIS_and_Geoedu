@@ -1,0 +1,157 @@
+/*-- scss:defaults --*/
+
+// import fonts
+@import url('https://webfontworld.github.io/pretendard/Pretendard.css');
+@import url('https://cdn.jsdelivr.net/gh/wan2land/d2coding/d2coding-ligature-full.css');
+@import url('https://webfontworld.github.io/heungkuk/SimKyungha.css');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300&display=swap');
+
+
+$body-bg:                                 #fdfdfd !default;
+$body-color:                              #313745 !default;
+$headings-color:                          $body-color !default;
+$code-block-bg:                           darken($body-bg, 5%) !default;
+$navbar-bg:                               $body-bg !default;
+
+
+$code-color:                              lighten($body-color, 10%) !default;
+$code-bg:                                 darken($body-bg, 10%) !default;
+
+
+$link-color:                              #F95700 !default;
+$link-shade-percentage:                   4% !default;
+$link-hover-color:                        shift-color($link-color, $link-shade-percentage) !default;
+
+
+/*-- scss:rules --*/
+
+@font-face {
+    font-family: 'KIMM_Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KIMM_Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LINESeedKR-Rg';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Rg.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LINESeedKR-Bd';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+
+// navbar
+.navbar-title {
+  font-family: 'KIMM_Bold';
+  //text-transform: uppercase;
+  font-size: 24px;
+}
+
+.nav-item {
+  font-family: "LINESeedKR-Rg";
+  font-size: 16px;
+}
+
+
+div.navbar-container container-fluid {
+  font-family: "Pretendard";
+  font-size: 1rem;
+}
+
+// TOC
+#toc-title {
+  font-family: "Pretendard";
+  font-size: 14px;
+}
+
+
+// font style
+p {
+  font-family: "Pretendard";
+  font-weight: inherit;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.nav-footer {
+  p, a {
+    font-size: 12px;
+  }
+}
+
+h3 {
+  font-size: 24px;
+}
+
+h5 {
+  font-size: 17px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "LINESeedKR-Rg";
+}
+
+td {
+  font-size: 16px;
+}
+
+code.sourceCode {
+  font-family: 'd2coding', monospace;
+  font-size: 14px;
+}
+
+code {
+  font-family: 'd2coding', monospace;
+  font-size: 14px;
+}
+
+div.listing-date {
+  font-family: "IBM Plex Mono";
+  font-size: 13px;
+  font-weight: 100;
+}
+
+div.listing-reading-time {
+  font-family: "Pretendard";
+  font-size: 12px;
+  font-weight: 100;
+}
+
+#listing-listing-sort {
+  font-family: "Pretendard";
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.quarto-listing-category-title {
+  font-family: "Pretendard";
+}
+
+.category {
+  font-size: 14px;
+}
+
+figcaption{
+  font-size: 12px;
+  text-align: center;
+}
+
+// The left hand sidebar
+$grid-sidebar-width: 250px !default;
+
+// The main body
+$grid-body-width: 1000px !default;
+
+// The right hand margin bar
+$grid-margin-width: 250px !default;
+
+// The gutter that appears between the above columns
+$grid-column-gutter-width: 1.5rem !default;

@@ -1,7 +1,10 @@
 ---
 title: "Introduction"
 author: "김세창"
-format: html
+format:
+  html:
+    code-fold: true
+    code-tools: true
 editor: visual
 ---
 
@@ -11,4 +14,53 @@ editor: visual
 
 ## Running Code
 
-그렇다면 왜 중요한가?
+```{r}
+#| warning: false
+#| message: false
+#| echo: false
+library(tidyverse)
+library(gapminder)
+library(DT)
+library(knitr)
+library(kableExtra)
+```
+
+### 정적 테이블(static table)
+
+우리가 보통 보게 되는 테이블(표)은 이렇게 생겼습니다. 주어진 정보를 일방적으로 볼 수만 있고, 독자가 할 수 있는 것은 제한적(거의 전무함)입니다. 이런 전통적인 형식의 것을 가리켜 '정적 테이블(static table)'이라고 부르겠습니다.
+
+```{r}
+gapminder |>
+  head(10) |>
+  kable(caption = "국가의 연도별 인구 및 경제 지표")
+```
+
+'이렇지 않은 표가 있나?' 라는 생각이 들 수 있습니다. 그러나 다음의 표를 보면 생각보다 여러 옵션이 있다는 것을 알 수 있죠.
+
+### 동적 테이블(dynamic table)
+
+```{r}
+datatable(gapminder,
+          caption = "국가의 연도별 인구 및 경제 지표",
+          filter = "top",
+          editable = TRUE,
+          extensions = "Buttons",
+          options = list(
+            pageLength = 5,
+            autoWidth = TRUE,
+            dom = "Bftip",
+            buttons=c("copy", "excel", "pdf", "print")
+          ))
+```
+
+이제 독자도 할 수 있는 것이 생겼습니다. 그것도 꽤 많이요. 어떤 동작들을 할 수 있을까요?
+
+-   **정렬(오름/내림차순)**: 컬럼명을 눌러보면 됩니다.
+
+-   **페이지네이션(pagination)**: 지면 상 생략되는 데이터를 페이지 기능을 이용해 모두 볼 수 있습니다.
+
+-   **검색과 필터링**
+
+-   **수정**: 각 셀을 더블 클릭하면 수정도 가능해집니다.
+
+-   **다운로드:** 원하는 형식으로 다운로드를 받을 수도 있습니다.

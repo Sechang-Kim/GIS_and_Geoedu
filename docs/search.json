@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "GIS와 지리교육",
     "section": "",
-    "text": "0.1 Quarto\n이것은 테스트 페이지입니다.",
+    "text": "Welcome\n전국지리교사모임(전지모) 선생님들께\n안녕하세요, 서울대학교 지리교육과 김세창입니다. 이 페이지는 오늘 발표의 마지막 파트, “지리교육에서 GIS가 나아갈 수 있는 방향”을 보여드리고자 제작되었습니다.\n당연하게도 제가 말씀드릴 내용 말고도 다양한 방향이 있을 수 있고, 심지어 더 좋은 방향이 있을수도 있습니다. 다만 저를 포함해 제 지도교수님인 이상일 교수님, 함께 공부하고 있는 김우형과 전헤민 학생이 최근 구상하고 있는 바를 보여드리고자 합니다.\n먼저 용어를 정리하는 것이 좋을 것 같습니다. 흔히 우리는 GIS를 ‘지도 제작 프로그램’ 정도로 지칭하여 이야기합니다. 그래서 지리교육에 GIS를 활용한다고 하면 GIS 프로그램을 사용한 지리교육을 떠올립니다. 아시는 분들은 아시겠지만, 대표적으로 ArcGIS, QGIS, SGIS 정도가 있습니다. 여기서 ArcGIS는 데스크톱에 설치해서 사용하는 상용 소프트웨어, QGIS는 데스크톱에 설치해서 사용하는 무료 소프트웨어, SGIS는 웹에 접속해서 사용하는 웹 서비스입니다. 그런데 이러한 용례는 사실 굉장히 좁은 의미의 것입니다. 넓은 의미에서 보자면, GIS는 “공간정보를 시각화하고 분석하는 일련의 과정” 정도라고 볼 수 있겠습니다. 제가 여기서 말하는 “GIS 활용 지리교육”에서 GIS는 바로 이 넓은 의미를 지칭한다고 생각해주시면 좋겠습니다. 왜일까요?\n이는 좁은 의미에서의 “GIS”는 교육현장에 적용되기 사실상 불가능하기 때문입니다. 많은 선생님들께서 공감하시겠지만, 컴퓨터를 활용해서 교과를 가르치기란 무척 어렵습니다. 아마 다음과 같은 문제점이 있을 것입니다.\n\n나가야 할 진도만 나가도 시간이 부족한데, 언제 프로그램을 설치하나요?\n프로그램에서 요상한(?) 오류가 발생하면 언제 해결해주나요?\n교사는 그 어려운 프로그램을 언제 배우나요?\n정보 시간과 겹쳐서 컴퓨터실이 부족하면 어떻게 하나요?\n\n최근 AI나 데이터 사이언스가 매우 유행하게 되면서, GIS라는 분야 역시 ’데이터 사이언스’의 일환으로 바라볼 수 있게 되었습니다. 즉 GIS는 데이터의 한 종류인 공간정보를 다룰 뿐, 여타의 데이터 사이언스와 다를 것이 없다는 것입니다. 그런 의미에서 GIS를 “공간 데이터 사이언스(Spatial Data Science)”그런데 아시다시피 2022 개정 교육과정의 주요 안건은 “데이터 리터러시”입니다.\nWhen you click the Render button a document will be generated that includes both content and the output of embedded code. You can embed code like this:",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>GIS와 지리교육</span>"
     ]
@@ -34,7 +34,7 @@
     "href": "intro.html#running-code",
     "title": "2  Introduction",
     "section": "2.2 Running Code",
-    "text": "2.2 Running Code\n그렇다면 왜 중요한가?",
+    "text": "2.2 Running Code\n\n2.2.1 정적 테이블(static table)\n우리가 보통 보게 되는 테이블(표)은 이렇게 생겼습니다. 주어진 정보를 일방적으로 볼 수만 있고, 독자가 할 수 있는 것은 제한적(거의 전무함)입니다. 이런 전통적인 형식의 것을 가리켜 ’정적 테이블(static table)’이라고 부르겠습니다.\n\n\nCode\ngapminder |&gt;\n  head(10) |&gt;\n  kable(caption = \"국가의 연도별 인구 및 경제 지표\")\n\n\n\n국가의 연도별 인구 및 경제 지표\n\n\ncountry\ncontinent\nyear\nlifeExp\npop\ngdpPercap\n\n\n\n\nAfghanistan\nAsia\n1952\n28.801\n8425333\n779.4453\n\n\nAfghanistan\nAsia\n1957\n30.332\n9240934\n820.8530\n\n\nAfghanistan\nAsia\n1962\n31.997\n10267083\n853.1007\n\n\nAfghanistan\nAsia\n1967\n34.020\n11537966\n836.1971\n\n\nAfghanistan\nAsia\n1972\n36.088\n13079460\n739.9811\n\n\nAfghanistan\nAsia\n1977\n38.438\n14880372\n786.1134\n\n\nAfghanistan\nAsia\n1982\n39.854\n12881816\n978.0114\n\n\nAfghanistan\nAsia\n1987\n40.822\n13867957\n852.3959\n\n\nAfghanistan\nAsia\n1992\n41.674\n16317921\n649.3414\n\n\nAfghanistan\nAsia\n1997\n41.763\n22227415\n635.3414\n\n\n\n\n\n‘이렇지 않은 표가 있나?’ 라는 생각이 들 수 있습니다. 그러나 다음의 표를 보면 생각보다 여러 옵션이 있다는 것을 알 수 있죠.\n\n\n2.2.2 동적 테이블(dynamic table)\n\n\nCode\ndatatable(gapminder,\n          caption = \"국가의 연도별 인구 및 경제 지표\",\n          filter = \"top\",\n          editable = TRUE,\n          extensions = \"Buttons\",\n          options = list(\n            pageLength = 5,\n            autoWidth = TRUE,\n            dom = \"Bftip\",\n            buttons=c(\"copy\", \"excel\", \"pdf\", \"print\")\n          ))\n\n\n\n\n\n\n이제 독자도 할 수 있는 것이 생겼습니다. 그것도 꽤 많이요. 어떤 동작들을 할 수 있을까요?\n\n정렬(오름/내림차순): 컬럼명을 눌러보면 됩니다.\n페이지네이션(pagination): 지면 상 생략되는 데이터를 페이지 기능을 이용해 모두 볼 수 있습니다.\n검색과 필터링\n수정: 각 셀을 더블 클릭하면 수정도 가능해집니다.\n다운로드: 원하는 형식으로 다운로드를 받을 수도 있습니다.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction</span>"
     ]
