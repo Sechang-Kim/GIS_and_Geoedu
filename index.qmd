@@ -23,17 +23,3 @@ editor: visual
 -   정보 시간과 겹쳐서 컴퓨터실이 부족하면 어떻게 하나요?
 
 최근 AI나 데이터 사이언스가 매우 유행하게 되면서, GIS라는 분야 역시 '데이터 사이언스'의 일환으로 바라볼 수 있게 되었습니다. 즉 GIS는 데이터의 한 종류인 공간정보를 다룰 뿐, 여타의 데이터 사이언스와 다를 것이 없다는 것입니다. 그런 의미에서 GIS를 "공간 데이터 사이언스(Spatial Data Science)"그런데 아시다시피 2022 개정 교육과정의 주요 안건은 "데이터 리터러시"입니다.
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
-
-```{r}
-#| echo: false
-#| message: false
-#| warning: false
-
-library(tidyverse)
-library(gapminder)
-library(DT)
-
-datatable(gapminder)
-```
