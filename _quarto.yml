@@ -16,7 +16,11 @@ bibliography: references.bib
 
 format:
   html:
-    page-layout: full
+    grid:
+      sidebar-width: 200px
+      body-width: 1100px
+      margin-width: 200px
+      gutter-width: 1.0rem
     theme:
       - custom.scss
     mainfont: Pretendard
