@@ -24,7 +24,7 @@
     "href": "intro.html",
     "title": "2  Introduction",
     "section": "",
-    "text": "2.1 GIS\n지리교육에서 GIS의 활용은 오랫동안 강조되어 왔고, 또한 여러 가지 측면에서 시도되어왔다.",
+    "text": "2.1 들어가며\n여기서는 크게 테이블, 그래프, 그리고 지도 총 세 가지를 살펴보겠습니다. 각각 전통적인(교과서, 책 등) 방식과 인터랙티브(interactive)한 방식으로 나누어서 비교하는 방식으로 진행할까 합니다. 쭉 들어보시면서, 인터랙티브한 방식이 어떻게 수업에 활용될 수 있을지 한 번 떠올려보시면 좋겠습니다.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction</span>"
     ]
@@ -57,6 +57,16 @@
     "text": "3.1 요약\n요약하면 다음과 같다.",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>summary</span>"
+    ]
+  },
+  {
+    "objectID": "intro.html#테이블table",
+    "href": "intro.html#테이블table",
+    "title": "2  Introduction",
+    "section": "2.2 테이블(Table)",
+    "text": "2.2 테이블(Table)\n\n2.2.1 정적 테이블(static table)\n우리가 보통 보게 되는 테이블(표)은 이렇게 생겼습니다. 주어진 정보를 일방적으로 볼 수만 있고, 독자가 할 수 있는 것은 제한적(거의 전무함)입니다. 이런 전통적인 형식의 것을 가리켜 ’정적 테이블(static table)’이라고 부르겠습니다.\n\n\nCode\ngapminder |&gt;\n  head(10) |&gt;\n  kable(caption = \"국가의 연도별 인구 및 경제 지표\")\n\n\n\n국가의 연도별 인구 및 경제 지표\n\n\ncountry\ncontinent\nyear\nlifeExp\npop\ngdpPercap\n\n\n\n\nAfghanistan\nAsia\n1952\n28.801\n8425333\n779.4453\n\n\nAfghanistan\nAsia\n1957\n30.332\n9240934\n820.8530\n\n\nAfghanistan\nAsia\n1962\n31.997\n10267083\n853.1007\n\n\nAfghanistan\nAsia\n1967\n34.020\n11537966\n836.1971\n\n\nAfghanistan\nAsia\n1972\n36.088\n13079460\n739.9811\n\n\nAfghanistan\nAsia\n1977\n38.438\n14880372\n786.1134\n\n\nAfghanistan\nAsia\n1982\n39.854\n12881816\n978.0114\n\n\nAfghanistan\nAsia\n1987\n40.822\n13867957\n852.3959\n\n\nAfghanistan\nAsia\n1992\n41.674\n16317921\n649.3414\n\n\nAfghanistan\nAsia\n1997\n41.763\n22227415\n635.3414\n\n\n\n\n\n‘이렇지 않은 표가 있나?’ 라는 생각이 들 수 있습니다. 그러나 다음의 표를 보면 생각보다 여러 옵션이 있다는 것을 알 수 있죠.\n\n\n2.2.2 동적 테이블(dynamic table)\n\n\nCode\ndatatable(gapminder,\n          caption = \"국가의 연도별 인구 및 경제 지표\",\n          filter = \"top\",\n          editable = TRUE,\n          extensions = \"Buttons\",\n          options = list(\n            pageLength = 5,\n            autoWidth = TRUE,\n            dom = \"Bftip\",\n            buttons=c(\"copy\", \"excel\", \"pdf\", \"print\")\n          ))\n\n\n\n\n\n\n이제 독자도 할 수 있는 것이 생겼습니다. 그것도 꽤 많이요. 어떤 동작들을 할 수 있을까요?\n\n정렬(오름/내림차순): 컬럼명을 눌러보면 됩니다.\n페이지네이션(pagination): 지면 상 생략되는 데이터를 페이지 기능을 이용해 모두 볼 수 있습니다.\n검색과 필터링\n수정: 각 셀을 더블 클릭하면 수정도 가능해집니다.\n다운로드: 원하는 형식으로 다운로드를 받을 수도 있습니다.\n\n이제 독자는 정보를 수동적으로 받아들이기만 하는 것이 아니라, 주어진 표와 어느 정도 ‘상호작용’ 할 수 있습니다. 그래서 인터랙티브 테이블, 또는 동적 테이블이라고 부르는 것입니다.\n교과서(e-book)나 교사가 제작한 학습자료에 이런 테이블이 있다면 어떨까요? 아마 굳이 스마트폰이나 태블릿을 이용해 검색하지 않고도(주의가 순식간에 산만해질 수 있는) 검색 활동을 할 수 있을 것 같습니다. 예를 들어 “2007년 기준으로 평균 수명이 가장 나라를 찾아보세요” 라는 질문을 해볼 수 있겠지요.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction</span>"
     ]
   }
 ]
