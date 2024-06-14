@@ -17,9 +17,9 @@ bibliography: references.bib
 format:
   html:
     grid:
-      sidebar-width: 200px
-      body-width: 1100px
-      margin-width: 200px
+      sidebar-width: 250px
+      body-width: 1000px
+      margin-width: 250px
       gutter-width: 1.0rem
     theme:
       - custom.scss
