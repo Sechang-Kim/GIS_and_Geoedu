@@ -154,3 +154,8 @@ $quarto-margin-sidebar: 150px !default;
 
 // The gutter that appears between the above columns
 $grid-column-gutter-width: 0.5rem !default;
+
+/* Hide individual code fold buttons within <summary> tags */
+summary {
+  display: none;
+}
