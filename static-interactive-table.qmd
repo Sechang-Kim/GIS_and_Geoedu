@@ -1,5 +1,5 @@
 ---
-title: "Introduction"
+title: "테이블"
 author: "김세창"
 format:
   html:

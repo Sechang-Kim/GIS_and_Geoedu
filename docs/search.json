@@ -98,5 +98,55 @@
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>summary</span>"
     ]
+  },
+  {
+    "objectID": "static-interactive-table.html",
+    "href": "static-interactive-table.html",
+    "title": "2  테이블",
+    "section": "",
+    "text": "2.1 들어가며\n여기서는 크게 테이블, 그래프, 그리고 지도 총 세 가지를 살펴보겠습니다. 각각 전통적인(교과서, 책 등) 방식과 인터랙티브(interactive)한 방식으로 나누어서 비교하는 방식으로 진행할까 합니다. 쭉 들어보시면서, 인터랙티브한 방식이 어떻게 수업에 활용될 수 있을지 한 번 떠올려보시면 좋겠습니다.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>테이블</span>"
+    ]
+  },
+  {
+    "objectID": "static-interactive-table.html#테이블table",
+    "href": "static-interactive-table.html#테이블table",
+    "title": "2  테이블",
+    "section": "2.2 테이블(Table)",
+    "text": "2.2 테이블(Table)\n\n2.2.1 정적 테이블(static table)\n우리가 보통 보게 되는 테이블(표)은 이렇게 생겼습니다. 주어진 정보를 일방적으로 볼 수만 있고, 독자가 할 수 있는 것은 제한적(거의 전무함)입니다. 이런 전통적인 형식의 것을 가리켜 ’정적 테이블(static table)’이라고 부르겠습니다.\n\n\nCode\ngapminder |&gt;\n  head(10) |&gt;\n  kable(caption = \"국가의 연도별 인구 및 경제 지표\")\n\n\n\n국가의 연도별 인구 및 경제 지표\n\n\ncountry\ncontinent\nyear\nlifeExp\npop\ngdpPercap\n\n\n\n\nAfghanistan\nAsia\n1952\n28.801\n8425333\n779.4453\n\n\nAfghanistan\nAsia\n1957\n30.332\n9240934\n820.8530\n\n\nAfghanistan\nAsia\n1962\n31.997\n10267083\n853.1007\n\n\nAfghanistan\nAsia\n1967\n34.020\n11537966\n836.1971\n\n\nAfghanistan\nAsia\n1972\n36.088\n13079460\n739.9811\n\n\nAfghanistan\nAsia\n1977\n38.438\n14880372\n786.1134\n\n\nAfghanistan\nAsia\n1982\n39.854\n12881816\n978.0114\n\n\nAfghanistan\nAsia\n1987\n40.822\n13867957\n852.3959\n\n\nAfghanistan\nAsia\n1992\n41.674\n16317921\n649.3414\n\n\nAfghanistan\nAsia\n1997\n41.763\n22227415\n635.3414\n\n\n\n\n\n‘이렇지 않은 표가 있나?’ 라는 생각이 들 수 있습니다. 그러나 다음의 표를 보면 생각보다 여러 옵션이 있다는 것을 알 수 있죠.\n\n\n2.2.2 동적 테이블(dynamic table)\n\n\nCode\ndatatable(gapminder,\n          caption = \"국가의 연도별 인구 및 경제 지표\",\n          filter = \"top\",\n          editable = TRUE,\n          extensions = \"Buttons\",\n          options = list(\n            pageLength = 5,\n            autoWidth = TRUE,\n            dom = \"Bftip\",\n            buttons=c(\"copy\", \"excel\", \"pdf\", \"print\")\n          ))\n\n\n\n\n\n\n이제 독자도 할 수 있는 것이 생겼습니다. 그것도 꽤 많이요. 어떤 동작들을 할 수 있을까요?\n\n정렬(오름/내림차순): 컬럼명을 눌러보면 됩니다.\n페이지네이션(pagination): 지면 상 생략되는 데이터를 페이지 기능을 이용해 모두 볼 수 있습니다.\n검색과 필터링\n수정: 각 셀을 더블 클릭하면 수정도 가능해집니다.\n다운로드: 원하는 형식으로 다운로드를 받을 수도 있습니다.\n\n이제 독자는 정보를 수동적으로 받아들이기만 하는 것이 아니라, 주어진 표와 어느 정도 ‘상호작용’ 할 수 있습니다. 그래서 인터랙티브 테이블, 또는 동적 테이블이라고 부르는 것입니다.\n교과서(e-book)나 교사가 제작한 학습자료에 이런 테이블이 있다면 어떨까요? 아마 굳이 스마트폰이나 태블릿을 이용해 검색하지 않고도(주의가 순식간에 산만해질 수 있는) 검색 활동을 할 수 있을 것 같습니다. 예를 들어 “2007년 기준으로 평균 수명이 가장 나라를 찾아보세요” 라는 질문을 해볼 수 있겠지요.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>테이블</span>"
+    ]
+  },
+  {
+    "objectID": "static-interactive-plot-1.html",
+    "href": "static-interactive-plot-1.html",
+    "title": "3  그래프(1)",
+    "section": "",
+    "text": "3.1 그래프(graph)\n그러나 가장 범용적이고, 또 강력한 시각화 자료는 바로 그래프입니다. 그래프는 복잡한 정보를 쉽게 전달할 수도 있고, 여러 종류의 데이터 사이의 관계도 파악할 수도 있습니다. 요즘도 많이 나오는지 모르겠는데, 제가 고등학생 때는 한국지리 수능/모의고사에 삼각도표가 종종 나오곤 했었던 기억이 납니다. 그런 삼각도표 역시 그래프의 한 사례가 되겠습니다.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>그래프(1)</span>"
+    ]
+  },
+  {
+    "objectID": "static-interactive-plot-1.html#정적-그래프static-graph",
+    "href": "static-interactive-plot-1.html#정적-그래프static-graph",
+    "title": "3  그래프(1)",
+    "section": "3.2 정적 그래프(static graph)",
+    "text": "3.2 정적 그래프(static graph)\n먼저 정적 그래프입니다. 아까 살펴봤던 데이터를 다시 이용해보겠습니다. 1인당 GDP와 평균수명의 관계는 어떨까요?\n\n\nCode\ngapminder |&gt; \n  filter(year == 2007) |&gt; \n  ggplot(aes(x=gdpPercap, y=lifeExp, color = continent)) + \n  geom_point(size=2) +\n  xlab(\"1인당 GDP($)\") +\n  ylab(\"기대수명(세)\") +\n  ggtitle(\"소득과 평균수명의 상관관계(2007년)\") +\n  theme_minimal() +\n  theme(text=element_text(family=\"LINESeedKR\"),\n        legend.title=element_blank(),\n        plot.title=element_text(size = 28, face=\"bold\"),\n        axis.title=element_text(size = 22),\n        axis.text=element_text(size = 18),\n        legend.text=element_text(size = 18))\n\n\n\n\n\n\n\n\n\n몇 가지 정보를 얻을 수 있습니다. 먼저 GDP가 높을수록 기대수명이 높아지기는 합니다. 다만 완전히 직선의 관계에 있지는 않네요. 또 대륙별로 그 양상이 상당히 다릅니다. 아프리카 대륙은 전반적으로 1인당 GDP이 낮고, 그 편차가 크지 않습니다. 그러나 기대수명이 평균적으로 낮으면서, 그 편차는 아주 큽니다. 반면 유럽은 1인당 GDP의 편차는 상당히 큰 편이지만, 기대수명의 편차는 그렇게 크지 않네요. 이렇게 그래프는 어떤 정보를 받아들이는데 매우 중요한 역할을 합니다. 또 표만 보고는 생각하지 못했던 새로운 지식을 발견하게 될 수도 있습니다.\n그런데 이 그래프 역시 정적입니다. 독자는 주어진 정보를 수동적으로 받아들일 수만 있죠. 그리고 그래프에서는 거의 반드시 정보의 손실이 생깁니다. 가령 위 사례에서 한 국가의 평균수명이 82.6세라고 하더라도, 그래프에서는 ’대략 80세 초반 정도’로 받아들일 수 밖에 없습니다. 또 국가가 속한 대륙만 표시될 뿐, 특정 포인트가 어떤 국가의 것인지는 알 수 없습니다. 뿐만 아니라 원 데이터(raw data)에서는 볼 수 있었던 국가의 인구가 그래프에서는 완전히 사라지죠. 이런 정보의 손실은 당연한 것이지만, 때로는 아쉬울 때도 있습니다.\n동적 그래프(dynamic graph)는 어떨까요?",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>그래프(1)</span>"
+    ]
+  },
+  {
+    "objectID": "static-interactive-plot-1.html#동적-그래프dynamic-graph",
+    "href": "static-interactive-plot-1.html#동적-그래프dynamic-graph",
+    "title": "3  그래프(1)",
+    "section": "3.3 동적 그래프(dynamic graph)",
+    "text": "3.3 동적 그래프(dynamic graph)\n\n\nCode\ngapminder |&gt; \n  filter(year == 2007) |&gt; \n  plot_ly(\n    type='scatter',\n    mode='markers',\n    x = ~gdpPercap,\n    y = ~lifeExp,\n    text = ~country,\n    color = ~continent,\n    hovertemplate = paste(\n      \"&lt;b&gt;%{text}&lt;/b&gt;&lt;br&gt;\",\n      \"%{yaxis.title.text}: %{y}세\",\n      \"&lt;br&gt;%{xaxis.title.text}: $%{x:,.2f}\"\n    )) |&gt; \n  layout(title = list(\n    text = \"&lt;b&gt;소득과 기대수명의 상관관계(2007년)&lt;/b&gt;\",\n    x = 0.12),\n         xaxis = list(title = '1인당 GDP($)'),\n         yaxis = list(title = '기대수명(세)'),\n    font = list(size = 12, family = \"LINESeedKR-Rg\"))\n\n\n\n\n\n\n거의 똑같이 생긴 것 같지만, 각 포인트에 마우스를 가져다 대는 순간 재밌는 일이 벌어집니다. 나라의 이름과 기대수명, 1인당 GDP가 팝업(pop-up) 됩니다. 이렇게 되면 정보의 손실을 줄일 수도 있고, 궁금한 지점이 어떤 곳인지도 확인할 수 있을 것입니다.\n다음으로, 범례(legend)에 있는 특정 대륙을 한 차례 클릭해보면, 그 대륙에 해당하는 데이터는 사라지게 됩니다. 반대로 특정 대륙을 빠르게 더블클릭해보면, 그 대륙에 해당하는 데이터만 남습니다. 이런 기능을 활용한다면 학생들을 몇 개의 조로 나누고, 각 대륙별 특성을 알아보는 활동도 가능할 것 같습니다. 주의할 점은 특정 대륙만 남게 되면, x축과 y축의 눈금이 재조정된다는 것입니다.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>그래프(1)</span>"
+    ]
   }
 ]
