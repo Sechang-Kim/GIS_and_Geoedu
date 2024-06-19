@@ -81,7 +81,7 @@ gapminder |>
     ),
     title = list(
       text = "<b>소득과 기대수명의 상관관계(2007년)</b>",
-      x = 0.12),
+      x = 0.07),
     xaxis = list(title = '1인당 GDP($)'),
     yaxis = list(title = '기대수명(세)'),
     font = list(size = 12, family = "LINESeedKR-Rg"))
