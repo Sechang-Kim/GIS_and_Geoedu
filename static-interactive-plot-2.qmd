@@ -26,6 +26,10 @@ library(plotly)
 ```
 
 ```{r}
+#| message: false
+#| warning: false
+#| fig-height: 6
+
 gapminder |> 
   plot_ly(
     x = ~log10(gdpPercap),
@@ -45,11 +49,169 @@ gapminder |>
     ),
     title = list(
       text = "소득과 기대수명의 상관관계",
-      font = list(family="LINESeedKR-Bd"),
-      x = 0.07
+      font = list(family="LINESeedKR-Bd",
+                  size = 20),
+      x = 0.5
       ),
     xaxis = list(title = '1인당 GDP($)'),
     yaxis = list(title = '기대수명(세)'),
+    legend = list(
+      font = list(
+        size = 15,
+        family = "LINESeedKR-Rg")
+        ),
     font = list(size = 12, family = "LINESeedKR-Rg")
   )
+```
+
+```{r}
+#| message: false
+#| warning: false
+#| fig-height: 6
+pop_60.20 <- read_csv("data/pop_6020.csv")
+pop_60.20_pl <- pop_60.20 |>  
+  filter(C2 != 0) |> 
+  pivot_longer(cols = c(Male, Female),
+               names_to = "gender",
+               values_to = "pop") |> 
+  mutate(gender = factor(gender, levels = c("Male", "Female")),
+         pop = case_when(gender == "Male" ~ pop*(-1),
+                         TRUE ~ pop),
+         C2_NM = factor(
+           C2_NM,
+           levels = c("0-4","5-9","10-14","15-19","20-24",
+                      "25-29","30-34","35-39","40-44",
+                      "45-49","50-54","55-59","60-64",
+                      "65-69","70-74","75-79","80-84","85+")
+           ))
+
+pop_60.20_pl  |> 
+  plot_ly() |> 
+  add_bars(x = ~pop, y = ~C2_NM,
+           name = ~ifelse(gender == "Male", "남성", "여성"),
+           frame = ~PRD_DE,
+           color = ~gender,
+           colors = c("#7D9DC3", "#F78C85"),
+           orientation = "h",
+           customdata = abs(pop_60.20_pl$pop),
+           hovertemplate = '%{customdata:,}명') |> 
+  layout(title = list(
+    text = "인구피라미드의 변화",
+    font = list(size = 20,
+                family = "LINESeedKR-Bd")),
+    xaxis = list(
+      title = list(text = "인구수(만 명)", 
+                   font = list(size = 15,
+                               family = "LINESeedKR-Bd")),
+      tickfont = list(size = 13,
+                      family = "LINESeedKR-Rg"),
+      tickmode = "array", 
+      tickvals = c(-2500000, -2000000, -1500000, -1000000,
+                   -500000, 0, 500000, 1000000, 1500000,
+                   2000000, 2500000),
+      ticktext = c("250", "200", "150", "100", "50", "0",
+                   "50", "100", "150", "200", "250")),
+    yaxis = list(
+      title = list(text = "연령(세)", 
+                   font = list(size = 15,
+                               family = "LINESeedKR-Bd")),
+      tickfont = list(size = 13,
+                      family = "LINESeedKR-Rg"),
+      tickvals = c("0-4","5-9","10-14","15-19","20-24",
+                   "25-29","30-34","35-39","40-44",
+                   "45-49","50-54","55-59","60-64",
+                   "65-69","70-74","75-79","80-84","85+"),
+      ticktext = c("0-4","5-9","10-14","15-19","20-24",
+                   "25-29","30-34","35-39","40-44",
+                   "45-49","50-54","55-59","60-64",
+                   "65-69","70-74","75-79","80-84","85+"),
+      zeroline = FALSE),
+    legend = list(x = 0.5,
+                  y = 1,
+                  xanchor = "center",
+                  yanchor = "bottom",
+                  orientation = "h",
+                  font = list(size = 15,
+                              family = "LINESeedKR-Rg"),
+                  traceorder = "normal"),
+    margin = list(
+      l = 75,
+      r = 75,
+      t = 75,
+      b = 75),
+    hovermode = "y unified",
+    hoverlabel = list(
+      bgcolor = "white",
+      font = list(size = 12,
+                  family = "LINESeedKR-Rg")),
+    bargap = 0.1, barmode = 'overlay') |> 
+  animation_slider(currentvalue = list(
+    prefix = "연도: ",
+    font = list(size = 12, family = "LINESeedKR-Rg")))
+```
+
+```{r}
+#| message: false
+#| warning: false
+#| fig-height: 6
+
+pop_structure <- read_csv("data/population_structure_by_year.csv")
+
+pop_structure |> filter(year %% 10 == 0) |> 
+  plot_ly() |> 
+  add_bars(x = ~year, y = ~prop_child, name = "0~14세",
+           marker = list(color = "#ffe66d"),
+           hovertemplate = '%{y}%') |> 
+  add_bars(x = ~year, y = ~prop_youth, name = "15~64세",
+           marker = list(color = "#4ecdc4"),
+           hovertemplate = '%{y}%') |> 
+  add_bars(x = ~year, y = ~prop_older, name = "65세 이상",
+           marker = list(color = "#ff6b6b"),
+           hovertemplate = '%{y}%') |> 
+  add_trace(x = ~year, y = ~total_pop/10000,
+            name = "총 인구수", type = "scatter",
+            mode = "lines+markers", yaxis = "y2",
+            marker = list(color = "#323031"),
+            line = list(color = "#323031", width = 3),
+            hovertemplate = '%{y:d3-format}명') |> 
+  layout(title = list(
+    text = "인구구성비 및 총 인구수 변화",
+    font = list(size = 20, family = "LINESeedKR-Bd")),
+    xaxis = list(title = list(
+      text = "연도", 
+      font = list(size = 15,
+                  family = "LINESeedKR-Bd")),
+      tickfont = list(
+        size = 13,
+        family = "LINESeedKR-Rg"),
+      tickmode = "array",
+      tickvals = seq(1960, 2070, by = 10)),
+    yaxis = list(
+      title = list(text = "인구구성비(%)", 
+                   font = list(size = 15,
+                               family = "LINESeedKR-Bd")),
+      tickfont = list(size = 13, family = "LINESeedKR-Rg"),
+      tickvals = seq(0, 100, by = 10),
+      ticktext = seq(0, 100, by = 10),
+      zeroline = FALSE),
+    yaxis2 = list(title = list(
+      text = "인구 수(만 명)",
+      font = list(size = 15, family = "LINESeedKR-Bd")),
+      overlaying = "y", side = "right",
+      tickfont = list(size = 13, family = "LINESeedKR-Rg"),
+      range = c(0,5800),
+      zeroline = FALSE),
+    legend = list(
+      x = 1, y = 1,
+      xanchor = "right", yanchor = "bottom",
+      orientation = "h",
+      font = list(
+        size = 13, family = "LINESeedKR-Rg")),
+    margin = list(
+      l = 75, r = 75, t = 75, b = 75),
+    hovermode = "x unified",
+    hoverlabel = list(
+      bgcolor = "white",
+      font = list(size = 12, family = "LINESeedKR-Rg")),
+    barmode = "stack")
 ```
