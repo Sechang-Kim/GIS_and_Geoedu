@@ -42,11 +42,11 @@
   {
     "objectID": "references.html",
     "href": "references.html",
-    "title": "4  reference",
+    "title": "5  reference",
     "section": "",
-    "text": "4.1 출처\nisables the printing of code (only output is displayed).",
+    "text": "5.1 출처\nisables the printing of code (only output is displayed).",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>reference</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>reference</span>"
     ]
   },
   {
@@ -144,9 +144,19 @@
     "href": "static-interactive-plot-1.html#동적-그래프dynamic-graph",
     "title": "3  그래프(1)",
     "section": "3.3 동적 그래프(dynamic graph)",
-    "text": "3.3 동적 그래프(dynamic graph)\n\n\nCode\ngapminder |&gt; \n  filter(year == 2007) |&gt; \n  plot_ly(\n    type='scatter',\n    mode='markers',\n    x = ~gdpPercap,\n    y = ~lifeExp,\n    text = ~country,\n    color = ~continent,\n    hovertemplate = paste(\n      \"&lt;b&gt;%{text}&lt;/b&gt;&lt;br&gt;\",\n      \"%{yaxis.title.text}: %{y}세\",\n      \"&lt;br&gt;%{xaxis.title.text}: $%{x:,.2f}\"\n    )) |&gt; \n  layout(title = list(\n    text = \"&lt;b&gt;소득과 기대수명의 상관관계(2007년)&lt;/b&gt;\",\n    x = 0.12),\n         xaxis = list(title = '1인당 GDP($)'),\n         yaxis = list(title = '기대수명(세)'),\n    font = list(size = 12, family = \"LINESeedKR-Rg\"))\n\n\n\n\n\n\n거의 똑같이 생긴 것 같지만, 각 포인트에 마우스를 가져다 대는 순간 재밌는 일이 벌어집니다. 나라의 이름과 기대수명, 1인당 GDP가 팝업(pop-up) 됩니다. 이렇게 되면 정보의 손실을 줄일 수도 있고, 궁금한 지점이 어떤 곳인지도 확인할 수 있을 것입니다.\n다음으로, 범례(legend)에 있는 특정 대륙을 한 차례 클릭해보면, 그 대륙에 해당하는 데이터는 사라지게 됩니다. 반대로 특정 대륙을 빠르게 더블클릭해보면, 그 대륙에 해당하는 데이터만 남습니다. 이런 기능을 활용한다면 학생들을 몇 개의 조로 나누고, 각 대륙별 특성을 알아보는 활동도 가능할 것 같습니다. 주의할 점은 특정 대륙만 남게 되면, x축과 y축의 눈금이 재조정된다는 것입니다.",
+    "text": "3.3 동적 그래프(dynamic graph)\n\n\nCode\ngapminder |&gt; \n  filter(year == 2007) |&gt; \n  plot_ly(\n    type='scatter',\n    mode='markers',\n    x = ~gdpPercap,\n    y = ~lifeExp,\n    text = ~country,\n    color = ~continent,\n    hovertemplate = paste0(\n      \"&lt;b&gt;%{text}&lt;/b&gt;&lt;br&gt;\",\n      \"%{yaxis.title.text}: %{y}세&lt;br&gt;\",\n      \"%{xaxis.title.text}: $%{x:,.2f}\"\n    )) |&gt; \n  layout(\n    margin = list(\n      t = 60\n    ),\n    title = list(\n      text = \"&lt;b&gt;소득과 기대수명의 상관관계(2007년)&lt;/b&gt;\",\n      x = 0.12),\n    xaxis = list(title = '1인당 GDP($)'),\n    yaxis = list(title = '기대수명(세)'),\n    font = list(size = 12, family = \"LINESeedKR-Rg\"))\n\n\n\n\n\n\n거의 똑같이 생긴 것 같지만, 각 포인트에 마우스를 가져다 대는 순간 재밌는 일이 벌어집니다. 나라의 이름과 기대수명, 1인당 GDP가 팝업(pop-up) 됩니다. 이렇게 되면 정보의 손실을 줄일 수도 있고, 궁금한 지점이 어떤 곳인지도 확인할 수 있을 것입니다.\n다음으로, 범례(legend)에 있는 특정 대륙을 한 차례 클릭해보면, 그 대륙에 해당하는 데이터는 사라지게 됩니다. 반대로 특정 대륙을 빠르게 더블클릭해보면, 그 대륙에 해당하는 데이터만 남습니다. 이런 기능을 활용한다면 학생들을 몇 개의 조로 나누고, 각 대륙별 특성을 알아보는 활동도 가능할 것 같습니다. 주의할 점은 특정 대륙만 남게 되면, x축과 y축의 눈금이 재조정된다는 것입니다.",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>그래프(1)</span>"
+    ]
+  },
+  {
+    "objectID": "static-interactive-plot-2.html",
+    "href": "static-interactive-plot-2.html",
+    "title": "4  그래프(2)",
+    "section": "",
+    "text": "4.1 시계열 그래프\n어떤 변화를 이야기할 때, 시간의 흐름을 고려하지 않을 수가 없습니다. 비록 현재의 모습이 같다고 하더라도, 만약 그것이 완전히 다른 과거의 상태에서 비롯되었다면 현재의 모습은 다르게 보일 것입니다. 그런 측면에서 볼 때, 시간의 축은 또다른 통찰을 제시할 수 있는 중요한 요소입니다.\nCode\ngapminder |&gt; \n  plot_ly(\n    x = ~log10(gdpPercap),\n    y = ~lifeExp,\n    text = ~country,\n    hovertemplate = paste0(\n      \"&lt;b&gt;%{text}&lt;/b&gt;&lt;br&gt;\",\n      \"%{yaxis.title.text}: %{y}세&lt;br&gt;\",\n      \"%{xaxis.title.text}: $%{x:,.2f}\"\n    )) |&gt; \n  add_markers(color = ~continent,\n              frame = ~year, \n              marker = list(sizeref = 0.2, sizemode = \"area\")) |&gt; \n  layout(\n    margin = list(\n      t = 60\n    ),\n    title = list(\n      text = \"소득과 기대수명의 상관관계\",\n      font = list(family=\"LINESeedKR-Bd\"),\n      x = 0.12\n      ),\n    xaxis = list(title = '1인당 GDP($)'),\n    yaxis = list(title = '기대수명(세)'),\n    font = list(size = 12, family = \"LINESeedKR-Rg\")\n  )",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>그래프(2)</span>"
     ]
   }
 ]

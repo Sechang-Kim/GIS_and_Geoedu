@@ -1,0 +1,55 @@
+---
+title: "그래프(2)"
+format:
+  html:
+    code-fold: true
+    code-tools: true
+editor: visual
+---
+
+그래프는 앞의 한 종류만 보여드리기에는 조금 아쉽습니다. 훨씬 더 다양한 종류의 시각화 방식이 있기 때문입니다. 그래서 이번 장에서는 조금 더 '이런 종류의 시각화도 가능하구나' 라는 것을 보여드리려고 합니다.
+
+## 시계열 그래프
+
+어떤 변화를 이야기할 때, 시간의 흐름을 고려하지 않을 수가 없습니다. 비록 현재의 모습이 같다고 하더라도, 만약 그것이 완전히 다른 과거의 상태에서 비롯되었다면 현재의 모습은 다르게 보일 것입니다. 그런 측면에서 볼 때, 시간의 축은 또다른 통찰을 제시할 수 있는 중요한 요소입니다.
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+library(tidyverse)
+library(gapminder)
+library(DT)
+library(knitr)
+library(kableExtra)
+library(plotly)
+```
+
+```{r}
+gapminder |> 
+  plot_ly(
+    x = ~log10(gdpPercap),
+    y = ~lifeExp,
+    text = ~country,
+    hovertemplate = paste0(
+      "<b>%{text}</b><br>",
+      "%{yaxis.title.text}: %{y}세<br>",
+      "%{xaxis.title.text}: $%{x:,.2f}"
+    )) |> 
+  add_markers(color = ~continent,
+              frame = ~year, 
+              marker = list(sizeref = 0.2, sizemode = "area")) |> 
+  layout(
+    margin = list(
+      t = 60
+    ),
+    title = list(
+      text = "소득과 기대수명의 상관관계",
+      font = list(family="LINESeedKR-Bd"),
+      x = 0.12
+      ),
+    xaxis = list(title = '1인당 GDP($)'),
+    yaxis = list(title = '기대수명(세)'),
+    font = list(size = 12, family = "LINESeedKR-Rg")
+  )
+```

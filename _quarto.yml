@@ -12,6 +12,7 @@ book:
     - index.qmd
     - static-interactive-table.qmd
     - static-interactive-plot-1.qmd
+    - static-interactive-plot-2.qmd
     - references.qmd
 
 bibliography: references.bib
