@@ -1,5 +1,10 @@
 /*-- scss:defaults --*/
 
+/* Hide individual code fold buttons */
+button[aria-label="Toggle code"] {
+  display: none;
+}
+
 // import fonts
 @import url('https://webfontworld.github.io/pretendard/Pretendard.css');
 @import url('https://cdn.jsdelivr.net/gh/wan2land/d2coding/d2coding-ligature-full.css');
