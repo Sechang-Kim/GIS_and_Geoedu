@@ -42,11 +42,11 @@
   {
     "objectID": "references.html",
     "href": "references.html",
-    "title": "4  reference",
+    "title": "5  reference",
     "section": "",
-    "text": "4.1 출처\nisables the printing of code (only output is displayed).",
+    "text": "5.1 출처\nisables the printing of code (only output is displayed).",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>reference</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>reference</span>"
     ]
   },
   {
@@ -97,6 +97,76 @@
     "text": "3.3 동적 그래프(dynamic graph)\n\n\nCode\ngapminder |&gt; \n  filter(year == 2007) |&gt; \n  plot_ly(\n    type='scatter',\n    mode='markers',\n    x = ~gdpPercap,\n    y = ~lifeExp,\n    text = ~country,\n    color = ~continent,\n    hovertemplate = paste(\n      \"&lt;b&gt;%{text}&lt;/b&gt;&lt;br&gt;\",\n      \"%{yaxis.title.text}: %{y}세\",\n      \"&lt;br&gt;%{xaxis.title.text}: $%{x:,.2f}\"\n    )) |&gt; \n  layout(title = list(\n    text = \"&lt;b&gt;소득과 기대수명의 상관관계(2007년)&lt;/b&gt;\",\n    x = 0.12),\n         xaxis = list(title = '1인당 GDP($)'),\n         yaxis = list(title = '기대수명(세)'),\n    font = list(size = 12, family = \"LINESeedKR-Rg\"))\n\n\n\n\n\n\n거의 똑같이 생긴 것 같지만, 마우스를 가져다 대는 순간 재밌는 일이 벌어집니다.",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>summary</span>"
+    ]
+  },
+  {
+    "objectID": "static-interactive-table.html",
+    "href": "static-interactive-table.html",
+    "title": "2  테이블",
+    "section": "",
+    "text": "2.1 들어가며\n여기서는 크게 테이블, 그래프, 그리고 지도 총 세 가지를 살펴보겠습니다. 각각 전통적인(교과서, 책 등) 방식과 인터랙티브(interactive)한 방식으로 나누어서 비교하는 방식으로 진행할까 합니다. 쭉 들어보시면서, 인터랙티브한 방식이 어떻게 수업에 활용될 수 있을지 한 번 떠올려보시면 좋겠습니다.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>테이블</span>"
+    ]
+  },
+  {
+    "objectID": "static-interactive-table.html#테이블table",
+    "href": "static-interactive-table.html#테이블table",
+    "title": "2  테이블",
+    "section": "2.2 테이블(Table)",
+    "text": "2.2 테이블(Table)\n\n2.2.1 정적 테이블(static table)\n우리가 보통 보게 되는 테이블(표)은 이렇게 생겼습니다. 주어진 정보를 일방적으로 볼 수만 있고, 독자가 할 수 있는 것은 제한적(거의 전무함)입니다. 이런 전통적인 형식의 것을 가리켜 ’정적 테이블(static table)’이라고 부르겠습니다.\n\n\nCode\ngapminder |&gt;\n  head(10) |&gt;\n  kable(caption = \"국가의 연도별 인구 및 경제 지표\")\n\n\n\n국가의 연도별 인구 및 경제 지표\n\n\ncountry\ncontinent\nyear\nlifeExp\npop\ngdpPercap\n\n\n\n\nAfghanistan\nAsia\n1952\n28.801\n8425333\n779.4453\n\n\nAfghanistan\nAsia\n1957\n30.332\n9240934\n820.8530\n\n\nAfghanistan\nAsia\n1962\n31.997\n10267083\n853.1007\n\n\nAfghanistan\nAsia\n1967\n34.020\n11537966\n836.1971\n\n\nAfghanistan\nAsia\n1972\n36.088\n13079460\n739.9811\n\n\nAfghanistan\nAsia\n1977\n38.438\n14880372\n786.1134\n\n\nAfghanistan\nAsia\n1982\n39.854\n12881816\n978.0114\n\n\nAfghanistan\nAsia\n1987\n40.822\n13867957\n852.3959\n\n\nAfghanistan\nAsia\n1992\n41.674\n16317921\n649.3414\n\n\nAfghanistan\nAsia\n1997\n41.763\n22227415\n635.3414\n\n\n\n\n\n‘이렇지 않은 표가 있나?’ 라는 생각이 들 수 있습니다. 그러나 다음의 표를 보면 생각보다 여러 옵션이 있다는 것을 알 수 있죠.\n\n\n2.2.2 동적 테이블(dynamic table)\n\n\nCode\ndatatable(gapminder,\n          caption = \"국가의 연도별 인구 및 경제 지표\",\n          filter = \"top\",\n          editable = TRUE,\n          extensions = \"Buttons\",\n          options = list(\n            pageLength = 5,\n            autoWidth = TRUE,\n            dom = \"Bftip\",\n            buttons=c(\"copy\", \"excel\", \"pdf\", \"print\")\n          ))\n\n\n\n\n\n\n이제 독자도 할 수 있는 것이 생겼습니다. 그것도 꽤 많이요. 어떤 동작들을 할 수 있을까요?\n\n정렬(오름/내림차순): 컬럼명을 눌러보면 됩니다.\n페이지네이션(pagination): 지면 상 생략되는 데이터를 페이지 기능을 이용해 모두 볼 수 있습니다.\n검색과 필터링\n수정: 각 셀을 더블 클릭하면 수정도 가능해집니다.\n다운로드: 원하는 형식으로 다운로드를 받을 수도 있습니다.\n\n이제 독자는 정보를 수동적으로 받아들이기만 하는 것이 아니라, 주어진 표와 어느 정도 ‘상호작용’ 할 수 있습니다. 그래서 인터랙티브 테이블, 또는 동적 테이블이라고 부르는 것입니다.\n교과서(e-book)나 교사가 제작한 학습자료에 이런 테이블이 있다면 어떨까요? 아마 굳이 스마트폰이나 태블릿을 이용해 검색하지 않고도(주의가 순식간에 산만해질 수 있는) 검색 활동을 할 수 있을 것 같습니다. 예를 들어 “2007년 기준으로 평균 수명이 가장 나라를 찾아보세요” 라는 질문을 해볼 수 있겠지요.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>테이블</span>"
+    ]
+  },
+  {
+    "objectID": "static-interactive-plot-1.html",
+    "href": "static-interactive-plot-1.html",
+    "title": "3  그래프(1)",
+    "section": "",
+    "text": "3.1 그래프(graph)\n그러나 가장 범용적이고, 또 강력한 시각화 자료는 바로 그래프입니다. 그래프는 복잡한 정보를 쉽게 전달할 수도 있고, 여러 종류의 데이터 사이의 관계도 파악할 수도 있습니다. 요즘도 많이 나오는지 모르겠는데, 제가 고등학생 때는 한국지리 수능/모의고사에 삼각도표가 종종 나오곤 했었던 기억이 납니다. 그런 삼각도표 역시 그래프의 한 사례가 되겠습니다.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>그래프(1)</span>"
+    ]
+  },
+  {
+    "objectID": "static-interactive-plot-1.html#정적-그래프static-graph",
+    "href": "static-interactive-plot-1.html#정적-그래프static-graph",
+    "title": "3  그래프(1)",
+    "section": "3.2 정적 그래프(static graph)",
+    "text": "3.2 정적 그래프(static graph)\n먼저 정적 그래프입니다. 아까 살펴봤던 데이터를 다시 이용해보겠습니다. 1인당 GDP와 평균수명의 관계는 어떨까요?\n\n\nCode\ngapminder |&gt; \n  filter(year == 2007) |&gt; \n  ggplot(aes(x=gdpPercap, y=lifeExp, color = continent)) + \n  geom_point(size=2) +\n  xlab(\"1인당 GDP($)\") +\n  ylab(\"기대수명(세)\") +\n  ggtitle(\"소득과 평균수명의 상관관계(2007년)\") +\n  theme_minimal() +\n  theme(text=element_text(family=\"LINESeedKR\"),\n        legend.title=element_blank(),\n        plot.title=element_text(size = 28, face=\"bold\"),\n        axis.title=element_text(size = 22),\n        axis.text=element_text(size = 18),\n        legend.text=element_text(size = 18))\n\n\n\n\n\n\n\n\n\n몇 가지 정보를 얻을 수 있습니다. 먼저 GDP가 높을수록 기대수명이 높아지기는 합니다. 다만 완전히 직선의 관계에 있지는 않네요. 또 대륙별로 그 양상이 상당히 다릅니다. 아프리카 대륙은 전반적으로 1인당 GDP이 낮고, 그 편차가 크지 않습니다. 그러나 기대수명이 평균적으로 낮으면서, 그 편차는 아주 큽니다. 반면 유럽은 1인당 GDP의 편차는 상당히 큰 편이지만, 기대수명의 편차는 그렇게 크지 않네요. 이렇게 그래프는 어떤 정보를 받아들이는데 매우 중요한 역할을 합니다. 또 표만 보고는 생각하지 못했던 새로운 지식을 발견하게 될 수도 있습니다.\n그런데 이 그래프 역시 정적입니다. 독자는 주어진 정보를 수동적으로 받아들일 수만 있죠. 그리고 그래프에서는 거의 반드시 정보의 손실이 생깁니다. 가령 위 사례에서 한 국가의 평균수명이 82.6세라고 하더라도, 그래프에서는 ’대략 80세 초반 정도’로 받아들일 수 밖에 없습니다. 또 국가가 속한 대륙만 표시될 뿐, 특정 포인트가 어떤 국가의 것인지는 알 수 없습니다. 뿐만 아니라 원 데이터(raw data)에서는 볼 수 있었던 국가의 인구가 그래프에서는 완전히 사라지죠. 이런 정보의 손실은 당연한 것이지만, 때로는 아쉬울 때도 있습니다.\n동적 그래프(dynamic graph)는 어떨까요?",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>그래프(1)</span>"
+    ]
+  },
+  {
+    "objectID": "static-interactive-plot-1.html#동적-그래프dynamic-graph",
+    "href": "static-interactive-plot-1.html#동적-그래프dynamic-graph",
+    "title": "3  그래프(1)",
+    "section": "3.3 동적 그래프(dynamic graph)",
+    "text": "3.3 동적 그래프(dynamic graph)\n\n\nCode\ngapminder |&gt; \n  filter(year == 2007) |&gt; \n  plot_ly(\n    type='scatter',\n    mode='markers',\n    x = ~gdpPercap,\n    y = ~lifeExp,\n    text = ~country,\n    color = ~continent,\n    hovertemplate = paste0(\n      \"&lt;b&gt;%{text}&lt;/b&gt;&lt;br&gt;\",\n      \"%{yaxis.title.text}: %{y}세&lt;br&gt;\",\n      \"%{xaxis.title.text}: $%{x:,.2f}\"\n    )) |&gt; \n  layout(\n    margin = list(\n      t = 60\n    ),\n    title = list(\n      text = \"&lt;b&gt;소득과 기대수명의 상관관계(2007년)&lt;/b&gt;\",\n      x = 0.07),\n    xaxis = list(title = '1인당 GDP($)'),\n    yaxis = list(title = '기대수명(세)'),\n    font = list(size = 12, family = \"LINESeedKR-Rg\"))\n\n\n\n\n\n\n거의 똑같이 생긴 것 같지만, 각 포인트에 마우스를 가져다 대는 순간 재밌는 일이 벌어집니다. 나라의 이름과 기대수명, 1인당 GDP가 팝업(pop-up) 됩니다. 이렇게 되면 정보의 손실을 줄일 수도 있고, 궁금한 지점이 어떤 곳인지도 확인할 수 있을 것입니다.\n다음으로, 범례(legend)에 있는 특정 대륙을 한 차례 클릭해보면, 그 대륙에 해당하는 데이터는 사라지게 됩니다. 반대로 특정 대륙을 빠르게 더블클릭해보면, 그 대륙에 해당하는 데이터만 남습니다. 이런 기능을 활용한다면 학생들을 몇 개의 조로 나누고, 각 대륙별 특성을 알아보는 활동도 가능할 것 같습니다. 주의할 점은 특정 대륙만 남게 되면, x축과 y축의 눈금이 재조정된다는 것입니다.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>그래프(1)</span>"
+    ]
+  },
+  {
+    "objectID": "static-interactive-plot-2.html",
+    "href": "static-interactive-plot-2.html",
+    "title": "4  그래프(2)",
+    "section": "",
+    "text": "4.1 시계열 그래프\n우리가 어떠한 ’변화’를 이야기한다는 것은 곧 시간의 흐름을 고려한다는 의미입니다. 비록 현재의 모습이 같다고 하더라도, 만약 그것이 완전히 다른 과거의 상태에서 비롯되었다면 현재의 모습에 대한 평가는 다를 것입니다. 그런 측면에서 시간의 축은 또다른 통찰을 제시할 수 있는 중요한 요소입니다. 먼저, 시간을 가로축에 놓은 전형적인 시계열 그래프를 보겠습니다.\nCode\npop_structure &lt;- read_csv(\"data/population_structure_by_year.csv\")\n\npop_structure |&gt; filter(year %% 10 == 0) |&gt; \n  plot_ly() |&gt; \n  add_bars(x = ~year, y = ~prop_child, name = \"0~14세\",\n           marker = list(color = \"#ffe66d\"),\n           hovertemplate = '%{y}%') |&gt; \n  add_bars(x = ~year, y = ~prop_youth, name = \"15~64세\",\n           marker = list(color = \"#4ecdc4\"),\n           hovertemplate = '%{y}%') |&gt; \n  add_bars(x = ~year, y = ~prop_older, name = \"65세 이상\",\n           marker = list(color = \"#ff6b6b\"),\n           hovertemplate = '%{y}%') |&gt; \n  add_trace(x = ~year, y = ~total_pop/10000,\n            name = \"총 인구수\", type = \"scatter\",\n            mode = \"lines+markers\", yaxis = \"y2\",\n            marker = list(color = \"#323031\"),\n            line = list(color = \"#323031\", width = 3),\n            hovertemplate = '%{y:d3-format}명') |&gt; \n  layout(title = list(\n    text = \"인구구성비 및 총 인구수 변화\",\n    font = list(size = 20, family = \"LINESeedKR-Bd\")),\n    xaxis = list(title = list(\n      text = \"연도\", \n      font = list(size = 15,\n                  family = \"LINESeedKR-Bd\")),\n      tickfont = list(\n        size = 13,\n        family = \"LINESeedKR-Rg\"),\n      tickmode = \"array\",\n      tickvals = seq(1960, 2070, by = 10)),\n    yaxis = list(\n      title = list(text = \"인구구성비(%)\", \n                   font = list(size = 15,\n                               family = \"LINESeedKR-Bd\")),\n      tickfont = list(size = 13, family = \"LINESeedKR-Rg\"),\n      tickvals = seq(0, 100, by = 10),\n      ticktext = seq(0, 100, by = 10),\n      zeroline = FALSE),\n    yaxis2 = list(title = list(\n      text = \"인구 수(만 명)\",\n      font = list(size = 15, family = \"LINESeedKR-Bd\")),\n      overlaying = \"y\", side = \"right\",\n      tickfont = list(size = 13, family = \"LINESeedKR-Rg\"),\n      range = c(0,5800),\n      zeroline = FALSE),\n    legend = list(\n      x = 1, y = 1,\n      xanchor = \"right\", yanchor = \"bottom\",\n      orientation = \"h\",\n      font = list(\n        size = 13, family = \"LINESeedKR-Rg\")),\n    margin = list(\n      l = 75, r = 75, t = 75, b = 75),\n    hovermode = \"x unified\",\n    hoverlabel = list(\n      bgcolor = \"white\",\n      font = list(size = 12, family = \"LINESeedKR-Rg\")),\n    barmode = \"stack\")\n유소년층(0-14세), 생산가능연령층(15-64세), 그리고 노년층(65세 이상)의 비율과, 전체 인구를 그린 그래프입니다. 앞서 보던 그래프와 다른 점을 보자면, y축이 두 개라는 점입니다. 그래서 왼쪽에는 비율(%)를, 오른쪽에는 총 인구(명)를 나타내는 축이 있습니다. 이를 통해 우리나라의 총 인구의 추이와 부양비의 추이를 비교해서 볼 수 있을 것 같네요.\n그러나, 시간을 가로축에 두는 순간, 2차원 그래프에서 표현의 자유는 많이 빼앗기게 됩니다. 인구 피라미드를 예로 들어볼까요? 인구 피라미드는 그 자체로 이미 x축과 y축이 모두 사용 중입니다. 대개 x축의 좌우에 각각 남녀 인구를, y축에 연령층을 두죠. 이렇게 되면 시간의 축은 두기가 어려워집니다. 따라서 정적인 그래프에서 인구 피라미드의 변화를 살펴보려면, 어쩔 수 없이 인구 피라미드를 여러 번 그리는 수 밖에 없습니다. 이는 지면도 많이 할애해야 하고, 시각적으로 변화의 추이가 잘 드러나지 않습니다. 이러한 한계를 인터랙티브 그래프에서는 어떻게 극복할 수 있을까요? 아래의 그래프를 봅시다.\nCode\npop_60.20 &lt;- read_csv(\"data/pop_6020.csv\")\npop_60.20_pl &lt;- pop_60.20 |&gt;  \n  filter(C2 != 0) |&gt; \n  pivot_longer(cols = c(Male, Female),\n               names_to = \"gender\",\n               values_to = \"pop\") |&gt; \n  mutate(gender = factor(gender, levels = c(\"Male\", \"Female\")),\n         pop = case_when(gender == \"Male\" ~ pop*(-1),\n                         TRUE ~ pop),\n         C2_NM = factor(\n           C2_NM,\n           levels = c(\"0-4\",\"5-9\",\"10-14\",\"15-19\",\"20-24\",\n                      \"25-29\",\"30-34\",\"35-39\",\"40-44\",\n                      \"45-49\",\"50-54\",\"55-59\",\"60-64\",\n                      \"65-69\",\"70-74\",\"75-79\",\"80-84\",\"85+\")\n           ))\n\npop_60.20_pl  |&gt; \n  plot_ly() |&gt; \n  add_bars(x = ~pop, y = ~C2_NM,\n           name = ~ifelse(gender == \"Male\", \"남성\", \"여성\"),\n           frame = ~PRD_DE,\n           color = ~gender,\n           colors = c(\"#7D9DC3\", \"#F78C85\"),\n           orientation = \"h\",\n           customdata = abs(pop_60.20_pl$pop),\n           hovertemplate = '%{customdata:,}명') |&gt; \n  layout(title = list(\n    text = \"인구피라미드의 변화\",\n    font = list(size = 20,\n                family = \"LINESeedKR-Bd\")),\n    xaxis = list(\n      title = list(text = \"인구수(만 명)\", \n                   font = list(size = 15,\n                               family = \"LINESeedKR-Bd\")),\n      tickfont = list(size = 13,\n                      family = \"LINESeedKR-Rg\"),\n      tickmode = \"array\", \n      tickvals = c(-2500000, -2000000, -1500000, -1000000,\n                   -500000, 0, 500000, 1000000, 1500000,\n                   2000000, 2500000),\n      ticktext = c(\"250\", \"200\", \"150\", \"100\", \"50\", \"0\",\n                   \"50\", \"100\", \"150\", \"200\", \"250\")),\n    yaxis = list(\n      title = list(text = \"연령(세)\", \n                   font = list(size = 15,\n                               family = \"LINESeedKR-Bd\")),\n      tickfont = list(size = 13,\n                      family = \"LINESeedKR-Rg\"),\n      tickvals = c(\"0-4\",\"5-9\",\"10-14\",\"15-19\",\"20-24\",\n                   \"25-29\",\"30-34\",\"35-39\",\"40-44\",\n                   \"45-49\",\"50-54\",\"55-59\",\"60-64\",\n                   \"65-69\",\"70-74\",\"75-79\",\"80-84\",\"85+\"),\n      ticktext = c(\"0-4\",\"5-9\",\"10-14\",\"15-19\",\"20-24\",\n                   \"25-29\",\"30-34\",\"35-39\",\"40-44\",\n                   \"45-49\",\"50-54\",\"55-59\",\"60-64\",\n                   \"65-69\",\"70-74\",\"75-79\",\"80-84\",\"85+\"),\n      zeroline = FALSE),\n    legend = list(x = 0.5,\n                  y = 1,\n                  xanchor = \"center\",\n                  yanchor = \"bottom\",\n                  orientation = \"h\",\n                  font = list(size = 15,\n                              family = \"LINESeedKR-Rg\"),\n                  traceorder = \"normal\"),\n    margin = list(\n      l = 75,\n      r = 75,\n      t = 75,\n      b = 75),\n    hovermode = \"y unified\",\n    hoverlabel = list(\n      bgcolor = \"white\",\n      font = list(size = 12,\n                  family = \"LINESeedKR-Rg\")),\n    bargap = 0.1, barmode = 'overlay') |&gt; \n  animation_slider(currentvalue = list(\n    prefix = \"연도: \",\n    font = list(size = 12, family = \"LINESeedKR-Rg\")))\n이번에는 아래에 Play 버튼이 생겼습니다. 그리고 이를 눌러보면 시간에 따른 인구 피라미드의 변화를 볼 수 있습니다. 직관적으로 저연령층이 비대한 형태에서 고연령층이 비대해지는 형태로 바뀌고 있다는 사실을 볼 수 있습니다.\n이런 방식을 사용하면, 앞서 살펴본 1인당 GDP와 기대 수명 사이의 상관관계도 시각화 할 수 있습니다. 사실 제가 사용한 gapminder라는 데이터셋은 1952년부터 2007년까지 각국의 정보를 담고 있지만, 지금까지는 편의상 2007년 데이터만 추려서 보여드렸습니다. 그러나 1952년부터 2007년까지의 추이를 보면, 또 다른 정보를 얻을 수 있을지 모릅니다. 한 번 볼까요?\nCode\ngapminder |&gt; \n  plot_ly(\n    x = ~log10(gdpPercap),\n    y = ~lifeExp,\n    text = ~country,\n    hovertemplate = paste0(\n      \"&lt;b&gt;%{text}&lt;/b&gt;&lt;br&gt;\",\n      \"%{yaxis.title.text}: %{y}세&lt;br&gt;\",\n      \"%{xaxis.title.text}: $%{x:,.2f}\"\n    )) |&gt; \n  add_markers(color = ~continent,\n              frame = ~year, \n              marker = list(sizeref = 0.2, sizemode = \"area\")) |&gt; \n  layout(\n    margin = list(\n      t = 60\n    ),\n    title = list(\n      text = \"소득과 기대수명의 상관관계\",\n      font = list(family=\"LINESeedKR-Bd\",\n                  size = 20),\n      x = 0.5\n      ),\n    xaxis = list(title = '1인당 GDP($)'),\n    yaxis = list(title = '기대수명(세)'),\n    legend = list(\n      font = list(\n        size = 15,\n        family = \"LINESeedKR-Rg\")\n        ),\n    font = list(size = 12, family = \"LINESeedKR-Rg\")\n  )\n어떤가요? 전반적으로 시간이 지남에 따라 1인당 GDP와 기대수명이 모두 증가한다는 사실을 알 수 있습니다. 그리고 중간중간 급격하게 위치를 바꾸는 포인트도 있습니다. 저한텐 르완다, 캄보디아 등이 눈에 띄네요. 아마 내전 때문인 것 같습니다. 그리고 중간중간 급격하게 GDP가 늘어나는 적도기니(석유 발견), 급격히 줄어드는 북한(고난의 행군) 역시 눈에 띕니다.\n이런 그래프로 할 수 있는 학생 활동을 한번 생각해보면, 학생들이 경제 수준과 기대수명의 전반적인 상관관계를 생각해보는 한편, 저렇게 눈에 띄는 국가들에 대해 조사해 보는 것도 의미가 있을 듯 합니다. 또는 전반적인 상관관계를 벗어난 지역, 예컨대 GDP는 높지만 평균 수명이 높지 않다거나, 반대로 GDP는 크게 높지 않은데 평균 수명이 높은 국가를 찾아보고, 그 원인을 탐구해보는 것도 괜찮을 것 같습니다.\n이제 다음 장에서는 대망의 지도, ’지리적 시각화’를 보려고 합니다.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>그래프(2)</span>"
+    ]
+  },
+  {
+    "objectID": "static-interactive-map.html",
+    "href": "static-interactive-map.html",
+    "title": "5  지도",
+    "section": "",
+    "text": "“공간적인 것은 특별하다(Spatial is special)”는 말이 있습니다. 그건 공간 데이터가 다른 데이터와 달리 ‘공간’이라는 하나의 차원이 더 있기 때문입니다. 학생들이 지리를 어려워하는 이유 중 하나일 수도 있는데요, 공간 데이터는 어떤 ’위치 정보’와 ’속성 정보’가 결합되어 있습니다. 여기서 중요한 것은’결합’되어 있다는 점입니다.\n예컨대, 우리나라의 인구 자체는 그대로 두고, 그 배치를 완전히 바꿔본다고 가정해봅시다. 경기도 고양시의 인구와 경상북도 상주시 인구를 바꾸고, 서울특별시 관악구 인구를 전라남도 담양군과 바꿔보는 식으로요. 그렇게 마구 뒤섞었을 때, ’수치적 변동’에는 어떠한 변화도 생기지 않습니다. 이를테면 시군구 인구의 평균값, 분산 등등은 바뀌지 않는거죠. 하지만 직관적으로 우리는 그것이 엄청난 변화라는 것을 체감합니다. ’공간적 변동(spatial variation)’이 달라졌기 때문이고, 이는 곧 전자와 완전히 다른 인구 현상이 되었음을 알기 때문일 것입니다.\n이런 점에서 ‘지리적 시각화’, 쉬운 말로 지도 그리기는 매우 중요합니다. 주어진 정보를 직관적으로 제시할 뿐만 아니라, 지도화를 하기 전에는 몰랐던 새로운 사실도 알려주기 때문이죠. 더 이야기하면 지도학 시간이 될테니, 빠르게 실전으로 넘어가보겠습니다.\n\n\nCode\n# Layout\nbscols(\n  widths = c(4,8),\n  list(\n    filter_slider_gdp,\n    filter_slider_lifeExp,\n    filter_select_continent,\n    filter_select_year\n    ),\n  datatable\n)\n\n\n\n\n\n\nGDP per Capita\n\n\n\n\nLife Expectancy\n\n\n\n\nContinent\n\n\n\n\n\n\nYear\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nggplotly(ggplot_map)",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>지도</span>"
     ]
   }
 ]

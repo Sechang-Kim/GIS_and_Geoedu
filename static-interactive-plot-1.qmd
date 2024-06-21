@@ -1,5 +1,5 @@
 ---
-title: "summary"
+title: "그래프(1)"
 format:
   html:
     code-fold: true
@@ -70,17 +70,23 @@ gapminder |>
     y = ~lifeExp,
     text = ~country,
     color = ~continent,
-    hovertemplate = paste(
+    hovertemplate = paste0(
       "<b>%{text}</b><br>",
-      "%{yaxis.title.text}: %{y}세",
-      "<br>%{xaxis.title.text}: $%{x:,.2f}"
+      "%{yaxis.title.text}: %{y}세<br>",
+      "%{xaxis.title.text}: $%{x:,.2f}"
     )) |> 
-  layout(title = list(
-    text = "<b>소득과 기대수명의 상관관계(2007년)</b>",
-    x = 0.12),
-         xaxis = list(title = '1인당 GDP($)'),
-         yaxis = list(title = '기대수명(세)'),
+  layout(
+    margin = list(
+      t = 60
+    ),
+    title = list(
+      text = "<b>소득과 기대수명의 상관관계(2007년)</b>",
+      x = 0.07),
+    xaxis = list(title = '1인당 GDP($)'),
+    yaxis = list(title = '기대수명(세)'),
     font = list(size = 12, family = "LINESeedKR-Rg"))
 ```
 
-거의 똑같이 생긴 것 같지만, 마우스를 가져다 대는 순간 재밌는 일이 벌어집니다.
+거의 똑같이 생긴 것 같지만, 각 포인트에 마우스를 가져다 대는 순간 재밌는 일이 벌어집니다. 나라의 이름과 기대수명, 1인당 GDP가 팝업(pop-up) 됩니다. 이렇게 되면 정보의 손실을 줄일 수도 있고, 궁금한 지점이 어떤 곳인지도 확인할 수 있을 것입니다.
+
+다음으로, 범례(legend)에 있는 특정 대륙을 한 차례 클릭해보면, 그 대륙에 해당하는 데이터는 사라지게 됩니다. 반대로 특정 대륙을 빠르게 더블클릭해보면, 그 대륙에 해당하는 데이터만 남습니다. 이런 기능을 활용한다면 학생들을 몇 개의 조로 나누고, 각 대륙별 특성을 알아보는 활동도 가능할 것 같습니다. 주의할 점은 특정 대륙만 남게 되면, x축과 y축의 눈금이 재조정된다는 것입니다.

@@ -6,10 +6,14 @@ book:
   title: "GIS와 지리교육"
   author: "김세창"
   date: "2024. 6. 8."
+  repo-url: https://github.com/Sechang-Kim/GIS_and_Geoedu/
+  repo-actions: issue
   chapters:
     - index.qmd
-    - intro.qmd
-    - summary.qmd
+    - static-interactive-table.qmd
+    - static-interactive-plot-1.qmd
+    - static-interactive-plot-2.qmd
+    - static-interactive-map.qmd
     - references.qmd
 
 bibliography: references.bib

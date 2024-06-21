@@ -1,0 +1,71 @@
+---
+title: "지도"
+format:
+  html:
+    code-fold: true
+    code-tools: true
+editor: visual
+---
+
+"공간적인 것은 특별하다(Spatial is special)"는 말이 있습니다. 그건 공간 데이터가 다른 데이터와 달리 '공간'이라는 하나의 차원이 더 있기 때문입니다. 학생들이 지리를 어려워하는 이유 중 하나일 수도 있는데요, 공간 데이터는 어떤 '위치 정보'와 '속성 정보'가 결합되어 있습니다. 여기서 중요한 것은 '[**결합**]{.underline}'되어 있다는 점입니다.
+
+예컨대, 우리나라의 인구 자체는 그대로 두고, 그 배치를 완전히 바꿔본다고 가정해봅시다. 경기도 고양시의 인구와 경상북도 상주시 인구를 바꾸고, 서울특별시 관악구 인구를 전라남도 담양군과 바꿔보는 식으로요. 그렇게 마구 뒤섞었을 때, '수치적 변동'에는 어떠한 변화도 생기지 않습니다. 이를테면 시군구 인구의 평균값, 분산 등등은 바뀌지 않는거죠. 하지만 직관적으로 우리는 그것이 엄청난 변화라는 것을 체감합니다. '공간적 변동(spatial variation)'이 달라졌기 때문이고, 이는 곧 전자와 완전히 다른 인구 현상이 되었음을 알기 때문일 것입니다.
+
+이런 점에서 '지리적 시각화', 쉬운 말로 지도 그리기는 매우 중요합니다. 주어진 정보를 직관적으로 제시할 뿐만 아니라, 지도화를 하기 전에는 몰랐던 새로운 사실도 알려주기 때문이죠. 더 이야기하면 지도학 시간이 될테니, 빠르게 실전으로 넘어가보겠습니다.
+
+```{r}
+#| echo: false
+#| message: false
+#| error: false
+#| warning: false
+
+library(DT)
+library(tidyverse)
+library(crosstalk)
+library(gapminder)
+library(plotly)
+
+# Shared data for crosstalk
+shared_gapminder <- SharedData$new(as.data.frame(gapminder))
+
+# UI elements
+filter_slider_gdp <- filter_slider("gdpPercap", "GDP per Capita", shared_gapminder, ~round(gdpPercap, 0), step = 1000)
+filter_slider_lifeExp <- filter_slider("lifeExp", "Life Expectancy", shared_gapminder, ~round(lifeExp, 1))
+filter_select_continent <- filter_select("continent", "Continent", shared_gapminder, ~continent)
+filter_select_year <- filter_select("year", "Year", shared_gapminder, ~year)
+
+# DataTable
+datatable <- datatable(shared_gapminder,
+                       filter = "top",
+                       extensions = 'Buttons',
+                       options = list(
+                         dom = 'Bfrtip',
+                         buttons = c('copy', 'csv',
+                                     'excel', 'pdf', 'print')
+                         ))
+
+# ggplot map
+ggplot_map <- ggplot(shared_gapminder,
+                     aes(x = round(gdpPercap,0), y = round(lifeExp,1),
+                         color = continent)) +
+  geom_point(aes(size = pop), alpha = 0.7) +
+  scale_x_log10() +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+```
+
+```{r}
+# Layout
+bscols(
+  widths = c(4,8),
+  list(
+    filter_slider_gdp,
+    filter_slider_lifeExp,
+    filter_select_continent,
+    filter_select_year
+    ),
+  datatable
+)
+
+ggplotly(ggplot_map)
+```
