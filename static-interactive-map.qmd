@@ -36,13 +36,9 @@ filter_select_year <- filter_select("year", "Year", shared_gapminder, ~year)
 
 # DataTable
 datatable <- datatable(shared_gapminder,
-                       filter = "top",
-                       extensions = 'Buttons',
                        options = list(
-                         dom = 'Bfrtip',
-                         buttons = c('copy', 'csv',
-                                     'excel', 'pdf', 'print')
-                         ))
+                         dom = 't'
+                       ))
 
 # ggplot map
 ggplot_map <- ggplot(shared_gapminder,
