@@ -13,10 +13,7 @@ book:
     - static-interactive-table.qmd
     - static-interactive-plot-1.qmd
     - static-interactive-plot-2.qmd
-<<<<<<< HEAD
     - static-interactive-map.qmd
-=======
->>>>>>> 93d4f382677b67acab053f5298fb53c3da405162
     - references.qmd
 
 bibliography: references.bib
