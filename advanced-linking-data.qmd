@@ -1,0 +1,136 @@
+---
+title: "더 나아가기"
+format:
+  html:
+    code-fold: true
+    code-tools: true
+editor: visual
+---
+
+## 인터랙티브 데이터: 고급편
+
+지금까지 테이블, 그래프, 그리고 지도를 하나씩 살펴봤습니다. 이제 고급편입니다. 각각의 개체들을 한 번 연결시켜보겠습니다. 백문이 불여일견이니, 무슨 말인지는 아래를 보면서 직접 확인해볼까요?
+
+```{r}
+#| echo: false
+#| message: false
+#| error: false
+#| warning: false
+
+library(DT)
+library(tidyverse)
+library(crosstalk)
+library(gapminder)
+library(plotly)
+library(glue)
+library(sf)
+library(ggiraph)
+
+# Shared data for crosstalk
+shared_gapminder <- SharedData$new(as.data.frame(gapminder))
+
+# UI elements
+filter_slider_gdp <- filter_slider("gdpPercap", "GDP per Capita", shared_gapminder, ~round(gdpPercap, 0), step = 1000)
+filter_slider_lifeExp <- filter_slider("lifeExp", "Life Expectancy", shared_gapminder, ~round(lifeExp, 1))
+filter_select_continent <- filter_select("continent", "Continent", shared_gapminder, ~continent)
+filter_select_year <- filter_select("year", "Year", shared_gapminder, ~year)
+
+# DataTable
+datatable <- datatable(shared_gapminder,
+                       options = list(
+                         dom = 'tp'
+                       ))
+
+# ggplot map
+p1 <- ggplot(shared_gapminder,
+                     aes(x = round(gdpPercap,0), y = round(lifeExp,1),
+                         color = continent)) +
+  geom_point(aes(size = pop), alpha = 0.7) +
+  scale_x_log10() +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+```
+
+```{js}
+const setDefaultValue = function(filterId, defaultValue) {
+  window.addEventListener("load", function(event) {
+    const selectElement = document.getElementById(filterId).getElementsByClassName("selectized")[0].selectize;
+    selectElement.setValue(defaultValue, false);
+    
+    selectElement.on('change', function() {
+      if (selectElement.getValue().length === 0) {
+        selectElement.setValue(defaultValue, false);
+      }
+    });
+  });
+};
+
+setDefaultValue("year", "2007");
+```
+
+```{r}
+# Layout
+bscols(
+  widths = c(4,8),
+  list(
+    filter_slider_gdp,
+    filter_slider_lifeExp,
+    filter_select_continent,
+    filter_select_year
+    ),
+  datatable
+)
+
+ggplotly(p1)
+```
+
+```{r}
+#| message: false
+#| error: false
+#| warning: false
+
+sido_shp <- st_read("data/sido.shp", options = "ENCODING=CP949",
+                    quiet = TRUE)
+sigungu_shp <- st_read("data/sigungu.shp", options = "ENCODING=CP949", quiet = TRUE)
+data_sigungu <- read_rds("data/data_sigungu.rds")
+sigungu_data <- sigungu_shp |> 
+  left_join(
+    data_sigungu, join_by(SGG1_CD == C1)
+  )
+
+sigungu_data <- sigungu_data |> 
+  mutate(
+    index_class = case_when(
+      index < 0.2 ~ "1",
+      index >= 0.2 & index < 0.5 ~ "2",
+      index >= 0.5 & index < 1.0 ~ "3",
+      index >= 1.0 & index < 1.5 ~ "4",
+      index >= 1.5 ~ "5"
+    ),
+    index_class = factor(index_class, levels = as.character(1:5))
+  )
+
+class_color <- c("1" = "#d7191c", "2" = "#fdae61",
+                 "3" = "#ffffbf", "4" = "#a6d96a", 
+                 "5" = "#1a9641")
+```
+
+```{r}
+sigungu_data <- sigungu_data |> 
+  mutate(
+    index = format(index, digits = 4, nsmall = 4),
+    my_tooltip = str_c("Name: ", SGG1_FNM, "\n Index: ", index)
+  )
+gg <- ggplot() +
+  geom_sf_interactive(data = sigungu_data, 
+                      aes(fill = index_class, tooltip = my_tooltip, data_id = SGG1_FNM), show.legend = TRUE) +
+  geom_sf(data = sido_shp, fill = NA, lwd = 0.5) +
+  scale_fill_manual(name = "Classes", 
+                    labels = c("< 0.2", "0.2 ~ 0.5", "0.5 ~ 1.0", 
+                               "1.0 ~ 1.5", ">= 1.5"), 
+                    values = class_color, drop = FALSE) 
+girafe(ggobj = gg) |> 
+  girafe_options(
+    opts_hover(css = "fill: gray")
+  )
+```
