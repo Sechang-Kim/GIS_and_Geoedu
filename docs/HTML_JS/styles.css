@@ -1,0 +1,254 @@
+:root {
+  --bg: #f3f4f6;
+  --panel: #ffffff;
+  --border: #e5e7eb;
+  --text: #111827;
+  --muted: #6b7280;
+  --accent: #0f766e;
+  --radius: 0.6rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ───────────── 전체 래퍼 ───────────── */
+.app-wrapper {
+  width: min(100%, 1800px);
+  margin: 0 auto;
+  padding: 0 1rem 1.5rem;
+}
+
+/* ───────────── 상단 헤더 ───────────── */
+.page-header {
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  padding: 0.5rem 0.5rem 0.5rem;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+  font-size: 0.7rem;
+}
+
+/* ───────────── 메인 레이아웃 ───────────── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1.6fr 1.05fr;
+  gap: 1rem;
+  padding-top: 1rem;
+  min-height: calc(100vh - 88px);
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ───────────── 카드 헤더 ───────────── */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  padding: 0.35rem 0.75rem;
+  min-height: 38px;
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.1;
+}
+
+/* ───────────── 지도 영역 ───────────── */
+.left-panel #map {
+  flex: 1;
+  min-height: 400px;
+  padding: 0.4rem 0.4rem 0.4rem;
+  border-bottom-left-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
+}
+
+.basemap-switch {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.basemap-switch button {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 0.4rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+
+.basemap-switch button.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+/* ───────────── 오른쪽 패널 ───────────── */
+.right-panel {
+  min-height: 400px;
+  display: flex;
+  padding: 0.4rem 0.4rem 0.4rem;
+  flex-direction: column;
+}
+
+.metric-select-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.7rem;
+}
+
+#metric-select {
+  font-size: 0.7rem;
+  padding: 0.1rem 0.25rem;
+}
+
+/* ───────────── DataTable ───────────── */
+.dataTables_wrapper {
+  flex: 1;
+  padding: 0.4rem 0.5rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.dataTables_scroll {
+  flex: 1;
+}
+
+/* DataTables 상단바 높이 */
+#climate-table_wrapper .dt-layout-row {
+  min-height: 34px;
+  gap: 0.4rem;
+}
+
+#climate-table_wrapper .dt-layout-cell {
+  display: flex;
+  align-items: center;
+}
+
+/* entries per page select */
+.dt-length select {
+  height: 30px;
+  padding: 0.5rem 0.5rem 0.5rem;
+  font-size: 0.7rem;
+}
+
+/* 표 텍스트 */
+table.dataTable thead th {
+  white-space: nowrap;
+  font-size: 0.7rem;
+}
+
+table.dataTable tbody td {
+  white-space: nowrap;
+  font-size: 0.7rem;
+}
+
+/* 선택된 행 강조 */
+table.dataTable tbody tr.active-row {
+  background: rgba(15, 118, 110, 0.12);
+}
+
+/* ───────────── 표 아래 설명 ───────────── */
+.table-footer-panel {
+  border-top: 1px solid var(--border);
+  padding: 0.35rem 0.75rem 0.5rem;
+  background: #fff;
+}
+
+.legend-title {
+  margin: 0;
+  font-weight: 600;
+  font-size: 0.7rem;
+}
+
+.legend-text {
+  margin: 0.2rem 0 0;
+  font-size: 0.64rem;
+  color: var(--muted);
+  line-height: 1.3;
+}
+
+/* ───────────── Leaflet 팝업 ───────────── */
+.leaflet-popup-content-wrapper {
+  padding: 0; /* 우리가 넣은 콘텐츠 여백만 쓰자 */
+}
+
+.leaflet-popup-content {
+  margin: 0;
+  padding: 0;
+}
+
+.popup-chart-wrap {
+  width: 360px;
+  height: 240px;
+  padding: 0.5rem 0.5rem 0.4rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.popup-chart-title {
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-bottom: 0.35rem;
+}
+
+#popup-chart {
+  width: 100%;
+  height: 190px;
+  margin-top: 0.25rem; /* 아래로 살짝 내리기 */
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 0.35rem;
+}
+
+/* ───────────── 마커 흐릿 효과 ───────────── */
+.dimmed-marker {
+  filter: grayscale(1) opacity(0.35);
+}
+
+/* ───────────── 반응형 ───────────── */
+@media (max-width: 1100px) {
+  .two-col {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .left-panel #map {
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 650px) {
+  .app-wrapper {
+    padding: 0 0.6rem 1rem;
+  }
+  .card-header {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+}
