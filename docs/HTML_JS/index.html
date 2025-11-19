@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>주요 지역의 기후</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <!-- DataTables -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css" />
+
+  <!-- ECharts -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-wrapper">
+    <header class="page-header">
+      <h1>주요 지역의 기후</h1>
+      <p class="subtitle">지도에서 마커를 클릭하면 해당 지역의 월별 기온·강수량이 팝업으로 표시됩니다.</p>
+    </header>
+
+    <main class="two-col">
+      <!-- 왼쪽: 지도 -->
+      <section class="card left-panel">
+        <div class="card-header">
+          <h2>기후 지도</h2>
+          <div class="basemap-switch">
+            <button data-layer="osm" class="active">OSM</button>
+            <button data-layer="carto-voyager">Voyager</button>
+            <button data-layer="carto-positron">Positron</button>
+          </div>
+        </div>
+        <div id="map"></div>
+      </section>
+
+      <!-- 오른쪽: 표 -->
+      <section class="card right-panel">
+        <div class="card-header">
+          <h2>지역별 월별 기후</h2>
+          <div class="metric-select-wrap">
+            <label for="metric-select">지표:</label>
+            <select id="metric-select">
+              <option value="temp">평균 기온 (℃)</option>
+              <option value="precip">강수량 (㎜)</option>
+            </select>
+          </div>
+        </div>
+        <table id="climate-table" class="display" style="width:100%">
+          <thead>
+            <tr>
+              <th>지역</th>
+              <th>1월</th>
+              <th>2월</th>
+              <th>3월</th>
+              <th>4월</th>
+              <th>5월</th>
+              <th>6월</th>
+              <th>7월</th>
+              <th>8월</th>
+              <th>9월</th>
+              <th>10월</th>
+              <th>11월</th>
+              <th>12월</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <div class="table-footer-panel">
+          <p class="legend-title">표 설명</p>
+          <p class="legend-text">
+            드롭다운에서 기온/강수량을 바꾸면 표의 1~12월 값이 함께 바뀝니다.
+            표에서 지역을 클릭하면 지도에서 해당 마커만 강조되고, 다시 클릭하면 원래대로 돌아옵니다.
+            그래프는 지도 마커를 클릭했을 때만 팝업에 표시됩니다.
+          </p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- jQuery for DataTables -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <!-- DataTables -->
+  <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+  <!-- App -->
+  <script src="app.js"></script>
+</body>
+</html>
